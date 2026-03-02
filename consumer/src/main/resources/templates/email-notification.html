@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email notification</title>
+</head>
+<body>
+    <p>Hi [[${customerName}]],</p>
+    <p>We have an update for you.</p>
+
+    <div th:if="${content != null and !content.isEmpty()}">
+        <p><strong>Details</strong></p>
+        <ul>
+            <li th:if="${content['order'] != null}">An Order is placed for <span th:text="${content['order']}"></span> for <span th:text="${content['price']}"> Rupees</span></li>
+        </ul>
+    </div>
+    <p>Thanks,<br/>[[${senderName}]]</p>
+    <p th:text="${footer}"></p>
+</body>
+</html>

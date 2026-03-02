@@ -1,0 +1,33 @@
+spring:
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      properties:
+        spring.json.trusted.packages: "*"
+  # SMTP configuration (used only when `notification.email.delivery-mode: smtp`)
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: {$MAIL_USERNAME}
+    password: {$MAIL_PASSWORD}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+
+notification:
+  email:
+    # sendgrid (default) or smtp
+    delivery-mode: smtp
+  kafka:
+    bootstrap-servers: localhost:9092
+    group-id: notification-email-consumer
+    main-topic: notification-events
+    dlq-topic: notification-events-dlq
+  third-party:
+    base-url: https://api.sendgrid.com
+    send-path: /v3/mail/send
+    api-key: {$SENDGRID_API_KEY}
+    from-email: {$FROM_EMAIL}
+  template:
+    sender-name: Notification Service
+    footer: Please do not reply to this message.

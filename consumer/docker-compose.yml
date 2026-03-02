@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: notification-consumer-postgres
+    environment:
+      POSTGRES_DB: notification_consumer
+      POSTGRES_USER: notification
+      POSTGRES_PASSWORD: notification
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data1
+
+volumes:
+  pgdata:
